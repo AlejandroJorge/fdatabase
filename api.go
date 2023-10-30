@@ -62,3 +62,15 @@ func Load[T register](ID uint) (T, error) {
 
 	return data, nil
 }
+
+func Delete[T register](ID uint) error {
+	var dummy T // Only purpose is call GetFolderName
+	path := fmt.Sprintf("%s/%s/%d.json", FolderName, dummy.GetFolderName(), ID)
+
+	err := os.Remove(path)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
